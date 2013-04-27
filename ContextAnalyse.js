@@ -13,7 +13,7 @@ YUI.add('CFContextAnalyse', function (Y) {
          @param {String} str
          */
         text: function (str) {
-
+            this._getContentAnalysis({text: str});
         },
 
         /**
@@ -21,7 +21,7 @@ YUI.add('CFContextAnalyse', function (Y) {
          @param {String} url
          */
         url: function (url) {
-
+            this._getContentAnalysis({url: url});
         },
 
         /**
@@ -40,7 +40,7 @@ YUI.add('CFContextAnalyse', function (Y) {
             }
 
 
-            Y.YQL(q, this._parse);
+            Y.YQL(q, Y.bind(this._parse, this));
         },
 
         /**
@@ -48,7 +48,8 @@ YUI.add('CFContextAnalyse', function (Y) {
          @param {Object} o Response object
          */
         _parse: function (o) {
-            console.log("Got some text)", o);
+            console.log("Got some text)", o, this);
+            this.fire("results", {results: o.query.results});
         }
 
 
