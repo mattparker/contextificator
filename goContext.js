@@ -20,16 +20,34 @@ YUI().use("node", function (iY) {
             'CFContextAnalyse': {
                 requires: ['yql', 'base'],
                 fullpath: 'http://localhost/yh2013/ContextAnalyse.js'
+            },
+            'CFDataWikipedia': {
+                requires: ['jsonp', 'jsonp-url'],
+                fullpath: 'http://localhost/yh2013/CFDataWikipedia.js'
             }
         }
-    }).use("node", "CFContextAnalyse", function (pY) {
+    }).use("node", "CFContextAnalyse", 'CFDataWikipedia', 'gallery-get-selection', function (pY) {
 
         console.log("Is this the parent ", pY.config.doc, pY.config.win.location);
-        console.log(pY.one("div.txt").getContent());
+        
         console.log(pY);
-        var ContextAnalyser = new pY.ContextAnalyse();
-        ContextAnalyser.text("John Major");
-    })
+
+        var ContextAnalyser = new pY.CFContextAnalyse(),
+            selectedText = pY.getSelection();
+
+        ContextAnalyser.on("results", function () {
+            console.log("Ooh did this work", arguments);
+        });
+
+        // Now run context analysis on the selectedText (if there is any)
+        // or on the whole page if not
+        if (selectedText && selectedText.get("innerText")) {
+            ContextAnalyser.text(selectedText.get("innerText"));
+        } else {
+            ContextAnalyser.url(pY.config.win.location.toString());
+        }
+
+    });
 
 
 
