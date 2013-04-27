@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Test BOSS</title>
+        <script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>
+
+    </head>
+    <body>
+
+        <div id="wpc"></div>
+
+    <script>
+    YUI({
+        modules: {
+            'CFDataBoss': {
+                requires: ['yql', 'base'],
+                fullpath: 'http://localhost/yh2013/CFDataBoss.js'
+            }
+        }
+    }).use("node", "CFDataBoss", function (Y) {
+
+        var b = new Y.CFDataBoss();
+        b.text("Matthew Parker");
+
+    });
+
+    </script>
+</body>
+</html>

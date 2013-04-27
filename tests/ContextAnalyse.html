@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Test CA</title>
+        <script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>
+
+    </head>
+    <body>
+
+        <div id="wpc"></div>
+
+    <script>
+    YUI({
+        modules: {
+            'CFContextAnalyse': {
+                requires: ['yql', 'base'],
+                fullpath: 'http://localhost/yh2013/ContextAnalyse.js'
+            },
+            'CFDataWikipedia': {
+                requires: ['jsonp', 'jsonp-url'],
+                fullpath: 'http://localhost/yh2013/CFDataWikipedia.js'
+            }
+        }
+    }).use("node", "CFContextAnalyse", "CFDataWikipedia", "array", function (Y) {
+
+        
+        var ContextAnalyser = new Y.CFContextAnalyse();
+        
+        ContextAnalyser.on("results", function (ev) {
+            if (ev.results && ev.results.entities) {
+                
+                if (ev.results.entities.entity.wiki_url) {
+                    var wp = new Y.CFDataWikipedia();
+                    wp.on("results", function (o) {
+                        console.log("And here they are...", o)
+                        Y.one("#wpc").setContent(o)
+                    })
+                    wp.url(ev.results.entities.entity.wiki_url);
+                }
+            
+            }
+            console.log("results event", arguments);
+        });
+        
+        ContextAnalyser.text("John Major");
+
+
+    });
+
+    </script>
+</body>
+</html>
