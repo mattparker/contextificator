@@ -2,17 +2,23 @@
 
     var iframe = parentDoc.createElement('iframe'),
         ifrDoc,
-        html = '<html><head><title>Welcome to the Contextificator</title>' + 
+        html = '<!DOCTYPE html><html><head><title>Welcome to the Contextificator</title>' + 
             '<script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>' +
+            '<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.10.0/build/cssnormalize/cssnormalize-min.css">' +
             '<link rel="stylesheet" type="text/css" href="http://localhost/yh2013/css/ifr.css"/>' +
-            '</head><body><div id="contxt-container"></div>' +
+            '</head><body><div class="header">' + 
+            '<img src="http://localhost/yh2013/contextificator_ico.png" alt="Contextificator icon"/>' + 
+            '<h1>The Contextificator</h1>' +
+            '</div>' +
+            '<div id="contxt-container"></div>' +
             '<script src="http://localhost/yh2013/goContext.js"></script>' + 
+            ' <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_NWs5yyaiFwnl-Sxpzadcl7s9zRiI4z4&sensor=false"></script>' + 
             '</body></html>';
 
-    iframe.style.cssText = "right:0; width:15%; min-height:100%; border:0; background-color:rgba(20,20,20,0.67);top:0;position:fixed;z-index:99999";
+    iframe.style.cssText = "right:0; width:25%; min-height:100%; border:0; background-color:rgba(20,20,20,0.9);top:0;position:fixed;z-index:99999";
     iframe.id = 'contextificator-' + (new Date().getTime());
 
-    
+
     parentDoc.body.appendChild(iframe);
 
     ifrDoc = iframe.contentWindow.document;

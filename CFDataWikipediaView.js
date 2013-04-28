@@ -7,8 +7,8 @@ YUI.add('CFDataWikipediaView', function (Y) {
 
     Y.CFDataWikipediaView = Y.Base.create('CFDataWikipediaView', Y.View, [], {
 
-        template: '<h4>From <a href="{wiki_url}" target="_blank" title="View full wikipedia article in a new window">' +
-            'Wikipedia</a></h4><div class="wiki">{content}</div>',
+        template: '<div class="wiki_outer"><h4>From <a href="{wiki_url}" target="_blank" title="View full wikipedia article in a new window">' +
+            'Wikipedia</a></h4><div class="wiki">{content}</div></div>',
 
         render: function () {
             var cont = this.get("container"),

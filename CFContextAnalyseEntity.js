@@ -9,9 +9,12 @@ YUI.add('CFContextAnalyseEntity', function (Y) {
 
         _parser: null,
 
+        _results: {},
+
 
         initializer: function () {
             this._parser = null;
+            this._results = {};
         },
 
 
@@ -26,8 +29,39 @@ YUI.add('CFContextAnalyseEntity', function (Y) {
          */
         findDetail: function (renderers, container) {
 
+
             this._findDetailWikipedia(renderers, container);
-            this._findDetailBoss(renderers, container);
+            if (!this._results.boss) {
+                this._findDetailBoss(renderers, container);
+            }
+            this._findDetailGeo(renderers, container);
+        },
+
+
+        /**
+         Looks for geo data and tries to do a map
+         */
+        _findDetailGeo: function (renderers, container) {
+
+            var meta = this.get("metadata_list"),
+                ll,
+                lat,
+                lng;
+
+            if (meta && meta.metadata && meta.metadata.geo_location) {
+                // we have some coords,
+                // in brackets with a ,
+                ll = meta.metadata.geo_location.replace(")","").replace("(","").split(",");
+                lat = ll[0];
+                lng = ll[1];
+
+                renderers.map.setAttrs({
+                    "Lat": lat,
+                    "Lng": lng,
+                    renderTo: container
+                });
+                renderers.map.render();
+            }
         },
 
 
@@ -38,15 +72,46 @@ YUI.add('CFContextAnalyseEntity', function (Y) {
         _findDetailBoss: function (renderers, container) {
 
             var q = this.get("text").content,
-                service  = this._parser._services.boss;
+                service  = this._parser._services.boss,
+                webEv,
+                imEv;
 
-            service.on("results", function (ev) {
+            webEv = service.on("webresults", function (ev) {
+
+                this._results.boss = this._results.boss || {};
+                this._results.boss.web = ev.results.results;
+
+                renderers.boss.web.setAttrs({
+                    "results": ev.results.results,
+                    "renderTo": container
+                });
+                renderers.boss.web.render();
+
+                webEv.detach();
                 console.log("boss results", ev);
-            });
+            
+            }, this);
+            
+            imEv = service.on("imagesresults", function (ev) {
+                this._results.boss = this._results.boss || {};
+                this._results.boss.images = ev.results.results;
+                console.log("boss image results", ev);
+                renderers.boss.images.setAttrs({
+                    "results": ev.results.results,
+                    "renderTo": container
+                });
+                renderers.boss.images.render();
 
-            service.text(q);
+                webEv.detach();
 
-        }
+            }, this);
+
+            // web results
+            service.text(q, {count: 2, service: "web"});
+            // image results
+            service.text(q, {count: 2, service: "images"});
+
+        },
 
 
         /**

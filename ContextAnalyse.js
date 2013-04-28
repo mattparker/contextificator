@@ -48,7 +48,7 @@ YUI.add('CFContextAnalyse', function (Y) {
          @param {Object} o Response object
          */
         _parse: function (o) {
-            console.log("Got some text)", o, this);
+
             this.fire("results", {results: o.query.results});
         }
 

@@ -4,7 +4,9 @@
 var CONTEXTIFICATOR = {};
 
 
-YUI({modules: {
+YUI({
+        //filter:"raw",
+        modules: {
             'CFContextAnalyse': {
                 requires: ['yql', 'base'],
                 fullpath: 'http://localhost/yh2013/ContextAnalyse.js'
@@ -21,6 +23,14 @@ YUI({modules: {
                 requires: ['yql'],
                 fullpath: 'http://localhost/yh2013/CFDataBoss.js'
             },
+            'CFDataBossWebView': {
+                requires: ['view'],
+                fullpath: 'http://localhost/yh2013/CFDataBossWebView.js'
+            },
+            'CFDataBossImagesView': {
+                requires: ['view'],
+                fullpath: 'http://localhost/yh2013/CFDataBossImagesView.js'                
+            },
             'CFContextAnalyseParser': {
                 requires: ['arraylist', 'array', 'base'],
                 fullpath: 'http://localhost/yh2013/CFContextAnalyseParser.js'
@@ -32,19 +42,25 @@ YUI({modules: {
             'CFContextAnalyseEntityView': {
                 requires: ['view'],
                 fullpath: 'http://localhost/yh2013/CFContextAnalyseEntityView.js'
+            },
+            'CFDataMapView': {
+                requires: ['view'],
+                fullpath: 'http://localhost/yh2013/CFDataMapView.js'
             }
         }
     }).use("node", "CFContextAnalyse", 
         'CFContextAnalyseEntity', 'CFContextAnalyseEntityView',
-        'CFDataBoss', 
+        'CFDataBoss', 'CFDataBossWebView', 'CFDataBossImagesView',
         'CFDataWikipedia', 'CFDataWikipediaView',
-        'CFContextAnalyseParser', function (iY) {
+        'CFDataMapView',
+        'CFContextAnalyseParser', 
+        'gallery-accordion-horiz-vert', 
+        'gallery-twitter-widget', function (iY) {
 
     // iY is the iframe Y instance
     
 
 
-    console.log(YUI.version);
 
 
     // Now this one is bound to the parent window/document - 
@@ -58,21 +74,27 @@ YUI({modules: {
         var contextAnalyser = new iY.CFContextAnalyse(),
             contextResponse,
             firstResponse,
+            accord,
+            mainContainer = iY.one('#contxt-container'),
             contextResponseParser = new iY.CFContextAnalyseParser({
-                container: iY.one('#contxt-container')
+                container: mainContainer
             }),
             searchServices = {
                 "boss": new iY.CFDataBoss(),
                 "wikipedia": new iY.CFDataWikipedia()
             },
             renderers = {
-                "boss": '',
-                "wikipedia": new iY.CFDataWikipediaView()
+                "boss": {
+                    "web": new iY.CFDataBossWebView(),
+                    "images": new iY.CFDataBossImagesView()
+                },
+                "wikipedia": new iY.CFDataWikipediaView(),
+                "map": new iY.CFDataMapView()
             }
 
 
         contextAnalyser.on("results", function (ev) {
-            console.log("Ooh did this work", ev.results);
+
 
             if (ev.results === null) {
                 // Context Analysis didn't help... need to do something else...
@@ -88,8 +110,43 @@ YUI({modules: {
 
                 contextResponseParser.render();
 
+                // accordian
+                accord = new iY.Accordion({
+                    //srcNode: mainContainer,
+                    titles: iY.all(".entity h3"),
+                    sections: iY.all(".entity .detail"),
+                    replaceTitleContainer:   false,
+                    replaceSectionContainer: false,
+                    allowAllClosed:true                   
+                });
+                accord.render(mainContainer);
+                accord.get("titles").each(function(n){
+                    n.ancestor().ancestor().addClass("entity");
+                });
+                accord.get("sections").addClass("detail");
+
+                mainContainer.delegate("click", function (ev, a) {
+                    
+                    var t = ev.target,
+                        resp,
+                        i = a.findSection(t);
+                   
+                    if (i >= 0) {
+                        
+                        resp = contextResponseParser.item(i);
+
+                        resp.findDetail(renderers, iY.one("#detailContainer_" + resp.get("clientId")));
+                        a.toggleSection(i);
+                    }
+                }, "h3", null, accord);
+
+
+
+
                 firstResponse = contextResponseParser.item(0);
                 firstResponse.findDetail(renderers, iY.one("#detailContainer_" + firstResponse.get("clientId")));
+                accord.toggleSection(0);
+
                 //contextResponse = new pY.CFContextResponseModel(ev.results);
                 //contextResponse.provideServices(searchServices);
 
@@ -106,7 +163,7 @@ YUI({modules: {
 
             var selectedText = pY.getSelection();
 
-            iY.one("#contxt-container").setContent("Loading...");
+          //  iY.one("#contxt-container").setContent("<span id='loadingindicator'>Loading...</span>");
 
             // Now run context analysis on the selectedText (if there is any)
             // or on the whole page if not
@@ -116,7 +173,7 @@ YUI({modules: {
                 // if it's (say) < 5 words, go straight to BOSS
                 // if it's more then carry on with ContextAnalyser
                 contextAnalyser.text(selectedText.get("innerText"));
-                
+
             } else {
                 contextAnalyser.url(pY.config.win.location.toString());
             }
