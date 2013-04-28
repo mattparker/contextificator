@@ -5,13 +5,13 @@
         html = '<!DOCTYPE html><html><head><title>Welcome to the Contextificator</title>' + 
             '<script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>' +
             '<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.10.0/build/cssnormalize/cssnormalize-min.css">' +
-            '<link rel="stylesheet" type="text/css" href="http://localhost/yh2013/css/ifr.css"/>' +
+            '<link rel="stylesheet" type="text/css" href="https://rawgithub.com/mattparker/contextificator/master/css/ifr.css"/>' +
             '</head><body><div class="header">' + 
-            '<img src="http://localhost/yh2013/contextificator_ico.png" alt="Contextificator icon"/>' + 
+            '<img src="https://rawgithub.com/mattparker/contextificator/master/contextificator_ico.png" alt="Contextificator icon"/>' + 
             '<h1>The Contextificator</h1>' +
             '</div>' +
             '<div id="contxt-container"></div>' +
-            '<script src="http://localhost/yh2013/goContext.js"></script>' + 
+            '<script src="https://rawgithub.com/mattparker/contextificator/master/goContext.js"></script>' + 
             ' <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_NWs5yyaiFwnl-Sxpzadcl7s9zRiI4z4&sensor=false"></script>' + 
             '</body></html>';
 

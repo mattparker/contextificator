@@ -9,43 +9,43 @@ YUI({
         modules: {
             'CFContextAnalyse': {
                 requires: ['yql', 'base'],
-                fullpath: 'http://localhost/yh2013/ContextAnalyse.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/ContextAnalyse.js'
             },
             'CFDataWikipedia': {
                 requires: ['jsonp', 'jsonp-url', 'node'],
-                fullpath: 'http://localhost/yh2013/CFDataWikipedia.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFDataWikipedia.js'
             },
             'CFDataWikipediaView': {
                 requires: ['view'],
-                fullpath: 'http://localhost/yh2013/CFDataWikipediaView.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFDataWikipediaView.js'
             },
             'CFDataBoss': {
                 requires: ['yql'],
-                fullpath: 'http://localhost/yh2013/CFDataBoss.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFDataBoss.js'
             },
             'CFDataBossWebView': {
                 requires: ['view'],
-                fullpath: 'http://localhost/yh2013/CFDataBossWebView.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFDataBossWebView.js'
             },
             'CFDataBossImagesView': {
                 requires: ['view'],
-                fullpath: 'http://localhost/yh2013/CFDataBossImagesView.js'                
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFDataBossImagesView.js'                
             },
             'CFContextAnalyseParser': {
                 requires: ['arraylist', 'array', 'base'],
-                fullpath: 'http://localhost/yh2013/CFContextAnalyseParser.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFContextAnalyseParser.js'
             },
             'CFContextAnalyseEntity': {
                 requires: ['model', 'node'],
-                fullpath: 'http://localhost/yh2013/CFContextAnalyseEntity.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFContextAnalyseEntity.js'//https://rawgithub.com/mattparker/contextificator/master/CFContextAnalyseEntity.js'
             },
             'CFContextAnalyseEntityView': {
                 requires: ['view'],
-                fullpath: 'http://localhost/yh2013/CFContextAnalyseEntityView.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFContextAnalyseEntityView.js'
             },
             'CFDataMapView': {
                 requires: ['view'],
-                fullpath: 'http://localhost/yh2013/CFDataMapView.js'
+                fullpath: 'https://rawgithub.com/mattparker/contextificator/master/CFDataMapView.js'
             }
         }
     }).use("node", "CFContextAnalyse", 
