@@ -37,7 +37,7 @@ YUI.add('CFDataBoss', function (Y) {
             
             query = Y.Lang.sub(query, oCfg);
             
-            Y.YQL(query, Y.bind(this._parse, this));
+            Y.YQL(query, Y.bind(this._parse, this, oCfg.service));
         
         },
 
@@ -45,9 +45,11 @@ YUI.add('CFDataBoss', function (Y) {
          Parses the YQL return data
          @param {Object} o Response object
          */
-        _parse: function (o) {
-            console.log("Got BOSS some text)", o);
-            this.fire("results", {results: o.query});
+        _parse: function (service, o) {
+            console.log("Got BOSS some text)", arguments);
+            this.fire("results", {results: o.query, service: service});
+
+            this.fire(service + "results", {results: o.query});
         }
 
 

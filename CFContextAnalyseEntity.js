@@ -27,8 +27,26 @@ YUI.add('CFContextAnalyseEntity', function (Y) {
         findDetail: function (renderers, container) {
 
             this._findDetailWikipedia(renderers, container);
-
+            this._findDetailBoss(renderers, container);
         },
+
+
+
+        /**
+         Searches BOSS for some text
+         */
+        _findDetailBoss: function (renderers, container) {
+
+            var q = this.get("text").content,
+                service  = this._parser._services.boss;
+
+            service.on("results", function (ev) {
+                console.log("boss results", ev);
+            });
+
+            service.text(q);
+
+        }
 
 
         /**

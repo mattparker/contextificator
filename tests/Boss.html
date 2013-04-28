@@ -19,7 +19,14 @@
     }).use("node", "CFDataBoss", function (Y) {
 
         var b = new Y.CFDataBoss();
+        
+        b.on("webresults", function () {console.log("boss results ", arguments)});
+        b.on("imagesresults", function () {console.log("image results", arguments)});
+        
         b.text("Matthew Parker");
+        b.text("Matthew Parker", {service: "images"});
+
+
 
     });
 
