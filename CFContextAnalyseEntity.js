@@ -88,14 +88,14 @@ YUI.add('CFContextAnalyseEntity', function (Y) {
                 renderers.boss.web.render();
 
                 webEv.detach();
-                console.log("boss results", ev);
+
             
             }, this);
             
             imEv = service.on("imagesresults", function (ev) {
                 this._results.boss = this._results.boss || {};
                 this._results.boss.images = ev.results.results;
-                console.log("boss image results", ev);
+
                 renderers.boss.images.setAttrs({
                     "results": ev.results.results,
                     "renderTo": container

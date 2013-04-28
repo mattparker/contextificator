@@ -24,7 +24,7 @@ YUI.add('CFDataBossImagesView', function (Y) {
                 d,
                 content = '',
                 i = 0;
-console.log("view results", res);
+
             for (i = 0; i < res.result.length; i = i + 1) {
 
                 r = res.result[i];
@@ -43,7 +43,7 @@ console.log("view results", res);
 
            
             cont.appendChild(Y.Lang.sub(this.template, {content: content}));
-console.log(content, cont);
+
             return this;
 
         }

@@ -103,6 +103,12 @@ YUI({
                 // this is an array list of Models of the right kind,
                 // with a View attached
                 contextResponseParser.reset();
+                if (accord) {
+
+                    accord.destroy();
+                    accord = null;
+                }
+                mainContainer.setContent('');
 
                 // these will be available to Models that want to do more lookups
                 contextResponseParser.provideServices(searchServices);
@@ -135,7 +141,7 @@ YUI({
                         
                         resp = contextResponseParser.item(i);
 
-                        resp.findDetail(renderers, iY.one("#detailContainer_" + resp.get("clientId")));
+                        resp.findDetail(renderers, accord.getSection(i).one(".detail"));//iY.one("#detailContainer_" + resp.get("clientId")));
                         a.toggleSection(i);
                     }
                 }, "h3", null, accord);
@@ -144,7 +150,7 @@ YUI({
 
 
                 firstResponse = contextResponseParser.item(0);
-                firstResponse.findDetail(renderers, iY.one("#detailContainer_" + firstResponse.get("clientId")));
+                firstResponse.findDetail(renderers, accord.getSection(0).one(".detail"));//iY.one("#detailContainer_" + firstResponse.get("clientId")));
                 accord.toggleSection(0);
 
                 //contextResponse = new pY.CFContextResponseModel(ev.results);

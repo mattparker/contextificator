@@ -14,7 +14,7 @@ YUI.add('CFDataMapView', function (Y) {
 
 
         render: function () {
-            console.log("we re mapping", this.getAttrs());
+
 
             var lat = this.get("Lat"),
                 lng = this.get("Lng"),
@@ -36,7 +36,7 @@ YUI.add('CFDataMapView', function (Y) {
                       mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
             map = new google.maps.Map(mapEl.getDOMNode(), mapOptions);            
-console.log(map);
+
         }
 
 

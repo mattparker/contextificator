@@ -110,6 +110,7 @@ YUI.add('CFContextAnalyseParser', function (Y) {
                 v.destroy();
             });
             this._itemTextContents = [];
+            this.initializer();
         }
 
     }, {
