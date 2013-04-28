@@ -10,7 +10,7 @@ YUI({modules: {
                 fullpath: 'http://localhost/yh2013/ContextAnalyse.js'
             },
             'CFDataWikipedia': {
-                requires: ['jsonp', 'jsonp-url'],
+                requires: ['jsonp', 'jsonp-url', 'node'],
                 fullpath: 'http://localhost/yh2013/CFDataWikipedia.js'
             },
             'CFDataWikipediaView': {
@@ -110,16 +110,17 @@ YUI({modules: {
 
             // Now run context analysis on the selectedText (if there is any)
             // or on the whole page if not
-            /*if (selectedText && selectedText.get("innerText")) {
+            if (selectedText && selectedText.get("innerText")) {
 
                 // We could switch here: if it's one word maybe include dictionary up front;
                 // if it's (say) < 5 words, go straight to BOSS
                 // if it's more then carry on with ContextAnalyser
                 contextAnalyser.text(selectedText.get("innerText"));
+                
             } else {
                 contextAnalyser.url(pY.config.win.location.toString());
-            }*/
-            contextAnalyser.text("The Rolling Stones are the worlds greatest rock and roll band led by Mick Jagger");
+            }
+            //contextAnalyser.text("The Rolling Stones are the worlds greatest rock and roll band led by Mick Jagger");
 
         };
 

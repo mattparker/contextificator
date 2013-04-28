@@ -26,16 +26,25 @@ YUI.add('CFContextAnalyseEntity', function (Y) {
          */
         findDetail: function (renderers, container) {
 
+            this._findDetailWikipedia(renderers, container);
+
+        },
+
+
+        /**
+         Gets wikipedia abstract text from API - most recent revision
+         */
+        _findDetailWikipedia: function (renderers, container) {
             var wiki_url = this.get("wiki_url"),
                 wikip,
                 wikiEv;
-console.log("looking for wikipedia ", wiki_url);
+
             if (wiki_url) {
                 // load up some wikipedia data and render it when it comes
                 wikip = this._parser._services.wikipedia;
                 
                 wikiEv = wikip.on("results", function (ev) {
-                    console.log("Heres the wikipedia data!", ev);
+
                     renderers.wikipedia.setAttrs({
                         "container": container,
                         "wiki_url": wiki_url,

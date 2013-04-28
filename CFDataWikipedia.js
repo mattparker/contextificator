@@ -47,6 +47,9 @@ YUI.add('CFDataWikipedia', function (Y) {
             var pages = o.query ? o.query.pages : false,
                 text,
                 abstract,
+                frag,
+                pageFrag,
+                firstImg,
                 i;
             
             if (!pages) {
@@ -62,15 +65,42 @@ YUI.add('CFDataWikipedia', function (Y) {
                         this.set("text", text);
                         this.set("pageid", i);
                     
-                        abstract = Y.Node.create(text).one("p").getContent();
+
                         
+
+                        // we need to process this a bit first
+                        pageFrag = Y.Node.create(text);
+
+
+                        // this is what we'll use for the abstract
+                        frag = Y.Node.create("<p></p>").appendChild(pageFrag.one("p"));
+
+                        firstImg = pageFrag.one("img");
+                        if (!firstImg.ancestor('p')) {
+                            frag.appendChild(firstImg);
+                        }
+
+                        // remove references
+                        frag.all("sup.reference").remove();
+                        
+                        // make links absolute
+                        frag.all("a").each(function (n) {
+                            var h = n.get("href");
+                            n.set("href", h.replace(Y.config.win.location.origin, 'http://en.wikipedia.org'));
+                        });
+
+                        // Images seem to be OK because they're from a different
+                        // wikimedia subdomain...
+
+                        abstract = frag.getContent();
+
 
                         this.fire("results", {results: o.query, abstract: abstract});
                         // there should only be one anyway
                         return;
 
                     } catch (e) {
-                        this.fire("error", {results: o});
+                        this.fire("error", {results: o, exception: e});
                     }
                 }
             }
@@ -88,5 +118,5 @@ YUI.add('CFDataWikipedia', function (Y) {
 
 
 }, '0.0.1', {
-    requires: ['jsonp', 'jsonp-url']
+    requires: ['jsonp', 'jsonp-url', 'node']
 });
