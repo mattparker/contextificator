@@ -1,50 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Contextificator by mattparker</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Contextificator : A js client side bookmarklet that adds context to the web pages you're reading" />
 
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Contextificator</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/mattparker/contextificator">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/mattparker/contextificator/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/mattparker/contextificator/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
 
-    <div class="wrapper">
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mattparker/contextificator">View on GitHub</a>
 
-      <section>
-        <div id="title">
-          <h1>Contextificator</h1>
-          <p>A js client side bookmarklet that adds context to the web pages you're reading</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/mattparker">mattparker</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
+          <h1 id="project_title">Contextificator</h1>
+          <h2 id="project_tagline">A js client side bookmarklet that adds context to the web pages you're reading</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mattparker/contextificator/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mattparker/contextificator/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h3>Welcome to the Contextificator</h3>
 
 <p>Find yourself reading something, wanting to find out more, opening up new tabs, searching, reading, flicking backwards and forwards?  The Contextificator does all that in the page you're on, with a click of a button.</p>
-      </section>
 
+<p>Want it?  Just drag this <a>Contextify</a> { var C = "CONTEXTIFICATOR"; win[C] = win[C] || (win[C]={}); win[C].Bookmarklet || (win[C].Bookmarklet = { URL:'<a href="https://rawgithub.com/mattparker/contextificator/master/bookmarklet.js">https://rawgithub.com/mattparker/contextificator/master/bookmarklet.js</a>', URL_SECURE:'<a href="https://rawgithub.com/mattparker/contextificator/master/yh2013/bookmarklet.js',loaded:">https://rawgithub.com/mattparker/contextificator/master/yh2013/bookmarklet.js',loaded:</a> false, iframeId: null}); if (!win[C].Bookmarklet.loaded) { var B=win[C].Bookmarklet, d=doc, h=d.head||d.getElementsByTagName('head')[0]||d.documentElement, s=d.createElement('script'); s.setAttribute('src',win.location.protocol==='https:'?B.URL_SECURE:B.URL); h.appendChild(s); } else { var iframe = document.getElementById(win[C].Bookmarklet.iframeId); iframe.contentWindow.CONTEXTIFICATOR.run();}}(this,this.document));) button to your favourites bar and use it where-ever you're reading.</p>
+      </section>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Contextificator maintained by <a href="https://github.com/mattparker">mattparker</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
+
   </body>
 </html>
