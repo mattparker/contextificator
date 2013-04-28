@@ -43,12 +43,46 @@ YUI.add('CFDataWikipedia', function (Y) {
          */
         _parse: function (o) {
             console.log("Got wikipedia some text)", o);
-            this.fire("results", {results: o.query});
+
+            var pages = o.query ? o.query.pages : false,
+                text,
+                abstract,
+                i;
+            
+            if (!pages) {
+                this.fire("error", {results: o});
+                return;
+            }
+
+            for (i in pages) {
+                if (pages.hasOwnProperty(i)) {
+                    
+                    try { 
+                        text = pages[i].revisions[0]["*"];
+                        this.set("text", text);
+                        this.set("pageid", i);
+                    
+                        abstract = Y.Node.create(text).one("p").getContent();
+                        
+
+                        this.fire("results", {results: o.query, abstract: abstract});
+                        // there should only be one anyway
+                        return;
+
+                    } catch (e) {
+                        this.fire("error", {results: o});
+                    }
+                }
+            }
+
+            
         }
 
 
     }, {
         ATTRS: {
+            text: {},
+            pageid: {}
         }
     })
 

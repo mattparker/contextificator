@@ -32,14 +32,14 @@ YUI.add('CFContextAnalyse', function (Y) {
 
             var q = "select * from contentanalysis.analyze where ";
             if (oCfg.text) {
-                q += "text='" + oCfg.text + "'";
+                q += "text='" + oCfg.text.replace("'", "") + "'";
             } else if (oCfg.url) {
                 q += "url='" + oCfg.url + "'";
             } else {
                 return null;
             }
 
-
+            
             Y.YQL(q, Y.bind(this._parse, this));
         },
 
